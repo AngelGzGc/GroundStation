@@ -8,16 +8,43 @@
 #include <QtSerialPort/QSerialPortInfo>
 #include <QCoreApplication>
 #include <QPlainTextEdit>
+#include <QVariant>
+#include <QQuickView>
+#include <QQuickItem>
+#include <QQmlContext>
+#include <QMetaObject>
+#include <QByteArray>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    // Configuración puerto serie.
     sc = new SerialClass();
     ui->serial_combo->addItems(sc->ListDevices());
 
     QObject::connect(sc, SIGNAL(PacketUpdated()), this, SLOT(UpdateLabels()));
+
+
+    // Mapa QML
+
+    QQuickView *view = new QQuickView();
+    QWidget *container = QWidget::createWindowContainer(view, this);
+    container->setMinimumSize(400, 400);
+    //container->setMaximumSize(500, 200);
+    container->setFocusPolicy(Qt::TabFocus);
+    view->rootContext()->setContextProperty("latitud",12.917352466802262);
+
+    view->setSource(QUrl::fromLocalFile("/home/Angel/LEEM/Angel/GUI_rockoon/main.qml"));
+
+    ui->verticalLayout->addWidget(container);
+    object = view->rootObject();
+
+    // Logger
+    Log = new Logger();
+    Log->Init("Log.txt");
 
 }
 
@@ -25,6 +52,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     //serial.close();
+    Log->Close();
 }
 
 
@@ -58,8 +86,36 @@ void MainWindow::on_connect_B_clicked()
 
 void MainWindow::UpdateLabels(){
 
-    ui->plainTextEdit->appendPlainText(QString(sc->recvpacket.variable.magicValueBegin));
-    ui->label->setText(QString::number(sc->recvpacket.variable.seconds));
+    //ui->plainTextEdit->appendPlainText(QString(sc->recvpacket.variable.magicValueBegin));
+    //ui->label->setText(QString::number(sc->recvpacket.variable.seconds));
+
+
+    double latitud = sc->recvpacket.variable.latitude;
+    double longitud = sc->recvpacket.variable.longitude;
+
+    ui->label->setText(QString::number(latitud));
+    ui->label_2->setText(QString::number(longitud));
+
+    // Y sucede la magia....
+    QVariant returnedValue;
+
+    QMetaObject::invokeMethod(object, "updateCenter",
+            Q_RETURN_ARG(QVariant, returnedValue),
+            Q_ARG(QVariant, latitud),Q_ARG(QVariant, longitud));
+
+    QMetaObject::invokeMethod(object, "moveCircle",
+            Q_RETURN_ARG(QVariant, returnedValue),
+            Q_ARG(QVariant, latitud),Q_ARG(QVariant, longitud));
+
+
+
+    QMetaObject::invokeMethod(object, "addCoord",
+            Q_RETURN_ARG(QVariant, returnedValue),
+            Q_ARG(QVariant, latitud),Q_ARG(QVariant, longitud));
+
+    //Después de la magia...
+
+    Log->Log(QByteArray::fromRawData((const char*)sc->recvpacket.record, sc->StructSize));
 }
 
 

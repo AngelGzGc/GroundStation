@@ -49,7 +49,6 @@ void SerialClass::Close(){
 void SerialClass::ReadData(){
     m_readData.append(serial.readAll());
     serial.flush();
-    //ui->plainTextEdit->appendPlainText(m_readData);
 
 
         for( int i=0;i<(m_readData.length()-1);i++)
@@ -68,15 +67,11 @@ void SerialClass::ReadData(){
         if((*m_readData.data()=='M')&&(m_readData.length()>=StructSize)){
 
             memcpy(&recvpacket.record,m_readData.data(),StructSize);
-
-            /*ui->label->setText(QString::number(receiv_data.variable.day));
-            ui->label_2->setText(QString::number(receiv_data.variable.pressureBMP));
-            ui->plainTextEdit->appendPlainText(QString(m_readData));*/
             m_readData.clear();
+            emit PacketUpdated();
         }
 
 
-        emit PacketUpdated();
 }
 
 

@@ -90,7 +90,7 @@ public:
 
     QStringList ListDevices();
     union data_union recvpacket;
-
+    int StructSize;
 private:
     QSerialPort serial;
     QByteArray  m_readData;
@@ -98,7 +98,7 @@ private:
 
 
 
-    int StructSize;
+
 public slots:
     void ReadData();
 signals:

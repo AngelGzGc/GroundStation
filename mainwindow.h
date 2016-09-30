@@ -7,7 +7,12 @@
 #include <QObject>
 #include <QMainWindow>
 #include <QtSerialPort/QtSerialPort>
+#include <QQuickView>
+#include <QQuickItem>
+#include <QMainWindow>
+
 #include "serialclass.h"
+#include "logger.h"
 
 #define N_bytes 174
 
@@ -44,6 +49,8 @@ private:
 
     Ui::MainWindow *ui;
     SerialClass *sc;
+    QQuickItem *object;
+    Logger *Log;
 };
 
 #endif // MAINWINDOW_H

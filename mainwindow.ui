@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>635</width>
-    <height>404</height>
+    <width>745</width>
+    <height>412</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,36 +17,6 @@
    <enum>Qt::ToolButtonIconOnly</enum>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QPushButton" name="send_data_B">
-    <property name="enabled">
-     <bool>true</bool>
-    </property>
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>300</y>
-      <width>121</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <pointsize>20</pointsize>
-     </font>
-    </property>
-    <property name="text">
-     <string>Send</string>
-    </property>
-    <property name="autoDefault">
-     <bool>false</bool>
-    </property>
-    <property name="default">
-     <bool>false</bool>
-    </property>
-    <property name="flat">
-     <bool>false</bool>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
@@ -106,7 +76,7 @@
     <widget class="QComboBox" name="baudrate_combo">
      <property name="geometry">
       <rect>
-       <x>13</x>
+       <x>10</x>
        <y>130</y>
        <width>151</width>
        <height>26</height>
@@ -126,7 +96,7 @@
     <widget class="QPushButton" name="pushButton">
      <property name="geometry">
       <rect>
-       <x>62</x>
+       <x>30</x>
        <y>160</y>
        <width>101</width>
        <height>32</height>
@@ -137,13 +107,24 @@
      </property>
     </widget>
    </widget>
+   <widget class="QWidget" name="verticalLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>261</width>
+      <height>311</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout"/>
+   </widget>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>30</y>
-      <width>131</width>
-      <height>16</height>
+      <x>500</x>
+      <y>240</y>
+      <width>61</width>
+      <height>15</height>
      </rect>
     </property>
     <property name="text">
@@ -153,37 +134,30 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>60</y>
-      <width>101</width>
-      <height>16</height>
+      <x>500</x>
+      <y>270</y>
+      <width>61</width>
+      <height>15</height>
      </rect>
     </property>
     <property name="text">
      <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QPlainTextEdit" name="plainTextEdit">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>40</y>
-      <width>221</width>
-      <height>191</height>
-     </rect>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>270</y>
-      <width>281</width>
-      <height>16</height>
+      <x>320</x>
+      <y>20</y>
+      <width>81</width>
+      <height>71</height>
      </rect>
     </property>
-    <property name="text">
-     <string>TextLabel</string>
+    <property name="pixmap">
+     <pixmap>Logo_LEEM__1__400x400.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
     </property>
    </widget>
   </widget>
@@ -192,7 +166,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>635</width>
+     <width>745</width>
      <height>20</height>
     </rect>
    </property>
